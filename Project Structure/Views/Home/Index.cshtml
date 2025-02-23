@@ -1,36 +1,15 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "_Layout";
+	ViewBag.Title = "Home Page";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
-</head>
-<body>
-
-    @* Start Header *@
-	<header class="mt-5">
-        <centre></centre>
-        <nav>
-			<a href="/Home/Index" class="btn btn-primary">Home</a>
-            <a href="/Home/AboutUs" class="btn btn-warning">About Us</a>
-            <a href="/Home/Privacy" class="btn btn-success">Privacy</a>
-            <a href="/Home/ContactUs" class="btn btn-light">Contact Us</a>
 
 
-        </nav>
 
 
-	</header>
-    @* End Header *@
 
-    @* Start Body *@
-    <section>
+<section>
         <centre>
             <div class="mt-3 p-5 bg-primary rounded-2">
                 <h1>Welcome to Home Page</h1>
@@ -40,18 +19,10 @@
             </div>
         </centre>
     </section>
-    @* End Body *@
 
-	@* Start Footer *@
-	<footer>
-		<centre>
-            <div class="mt-3">
-                <p> CopyRights &copy; Route @DateTime.Now.Year</p>
-            </div>
-	 </centre>
-	</footer>
-	@* End Footer *@
+ 
 
 
-</body>
-</html>
+
+
+
