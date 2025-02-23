@@ -7,16 +7,16 @@ namespace Project_Structure.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly IConfiguration _configuration;
 
-        public MoviesController(IConfiguration configuration) 
-        {
-            _configuration = configuration;
-        } 
-
+        // Model value Provider poriority
+        /// 2- Route Data    Segment
+        /// 3- Query String  Query Parameter
+        /// 1- Form-Data     Input
+        // 4- Request Header    Header
+        // 5- Request Body    Body      used with data Json or XML.
 
         [HttpGet] // Get: baseUrl/Movies/GetMovie/{id}
-        public IActionResult GetMovie(int id)
+        public IActionResult GetMovie([FromBody]int id, Movie movie)
         {
             if(id == 0)
            
@@ -39,6 +39,18 @@ namespace Project_Structure.Controllers
             return Content ( $"<h1> Movie with Id: {id} <h1>","text/html");
             
         }
+
+        [HttpPost] 
+        public IActionResult CreateMovie(Movie movie)
+        {
+            return View(movie);
+        }
+
+
+
+
+
+
 
         //[HttpGet] 
         //public IActionResult Hamada()
