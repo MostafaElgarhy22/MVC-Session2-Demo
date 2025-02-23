@@ -46,19 +46,9 @@ namespace Project_Structure
 
             app.UseRouting();
 
-            app.MapGet("/", async context =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-
-            app.MapPost("/XX{id}", async context =>
-             {
-                 await context.Response.WriteAsync($"Id = {context.Request.RouteValues["id"]}");
-             });
-
             app.MapControllerRoute(
                 name: "default",
-                pattern/*urlPath*/: "{controller=Movies}/{action=Index}/{id:int?}"
+                pattern/*urlPath*/: "{controller=Home}/{action=Index}/{id:int?}"
                 //constraints: new {id = new IntRouteConstraint()}
                // defaults: new { controller = "Movies", action = "Index" } //Old way
             );
