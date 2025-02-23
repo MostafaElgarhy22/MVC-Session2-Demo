@@ -46,6 +46,8 @@ namespace Project_Structure
 
             app.UseRouting();
 
+            app.UseStaticFiles(); 
+
             app.MapControllerRoute(
                 name: "default",
                 pattern/*urlPath*/: "{controller=Home}/{action=Index}/{id:int?}"
