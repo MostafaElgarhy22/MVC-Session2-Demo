@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,7 +16,18 @@ namespace Project_Structure
 
 
             #region Configure Services
-            webApplicationBuilder.Services.AddControllersWithViews(); 
+
+           // webApplicationBuilder.Services.AddControllers(); //Registering APIs Requird services (Controller Activator, Action Selector, Action Invoker, Model Binder, etc.)
+
+
+            webApplicationBuilder.Services.AddControllersWithViews(); //Registering MVC Requird services (Controller Activator, Action Selector, Action Invoker, Model Binder, etc.)
+
+
+            //webApplicationBuilder.Services.AddRazorPages(); //Registering Razor Pages Requird services (Action Selector, Action Invoker, Model Binder, Razor Pages, etc.)
+
+
+            //webApplicationBuilder.Services.AddMvc(); //Registering MVC Requird services (Controller Activator, Action Selector, Action Invoker, Model Binder, Razor Pages, etc.)
+
             #endregion
 
             var app = webApplicationBuilder.Build();
@@ -34,28 +46,22 @@ namespace Project_Structure
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.MapGet("/", async context =>
             {
-                app.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                await context.Response.WriteAsync("Hello World!");
+            });
 
-                app.MapGet("/Hamada", async context =>
-                {
-                    await context.Response.WriteAsync("Hello Hamada!");
-                });
+            app.MapPost("/XX{id}", async context =>
+             {
+                 await context.Response.WriteAsync($"Id = {context.Request.RouteValues["id"]}");
+             });
 
-                app.MapPost("/Hamada", async context =>
-                {
-                    await context.Response.WriteAsync("Hello Hamada!");
-                });
-
-                app.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            }); 
+            app.MapControllerRoute(
+                name: "default",
+                pattern/*urlPath*/: "{controller=Movies}/{action=Index}/{id:int?}"
+                //constraints: new {id = new IntRouteConstraint()}
+               // defaults: new { controller = "Movies", action = "Index" } //Old way
+            );
             #endregion
 
             app.Run();
